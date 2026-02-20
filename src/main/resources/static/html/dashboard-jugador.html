@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Jugador - Liga Baloncesto U22</title>
+    <link rel="stylesheet" href="/css/jugador.css">
+</head>
+<body>
+<div class="dashboard">
+    <header class="header">
+        <div class="header-left">
+            <h1>Panel Jugador</h1>
+        </div>
+        <div class="header-right">
+            <span>Bienvenido, <strong id="jugadorName">Jugador</strong></span>
+            <button onclick="cerrarSesion()" class="btn-logout">Salir</button>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <div class="perfil-jugador" id="perfilJugador">
+            <h3>MIS DATOS</h3>
+            <p><strong>Equipo:</strong> <span id="equipoNombre">Cargando...</span></p>
+            <p><strong>Dorsal:</strong> <span id="dorsal">-</span></p>
+            <p><strong>Posicion:</strong> <span id="posicion">-</span></p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="mostrarSeccion('companeros')" class="active">Mis Companeros</a></li>
+                <li><a href="#" onclick="mostrarSeccion('partidos')">Mis Partidos</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section id="seccion-companeros" class="seccion active">
+            <h2>Mis Companeros de Equipo</h2>
+            <div class="jugadores-grid" id="jugadoresGrid"></div>
+        </section>
+
+        <section id="seccion-partidos" class="seccion">
+            <h2>Proximos Partidos</h2>
+            <div class="partidos-lista" id="proximosPartidos"></div>
+
+            <h2 style="margin-top: 40px;">Resultados Recientes</h2>
+            <div class="resultados-lista" id="resultadosRecientes"></div>
+        </section>
+    </main>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/jugador.js"></script>
+</body>
+</html>

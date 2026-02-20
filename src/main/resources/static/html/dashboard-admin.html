@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Administrador - Liga Baloncesto U22</title>
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<div class="dashboard">
+    <header class="header">
+        <div class="header-left">
+            <h1>Panel Administrador</h1>
+        </div>
+        <div class="header-right">
+            <span>Bienvenido, <strong id="adminName">Admin</strong></span>
+            <button onclick="cerrarSesion()" class="btn-logout">Salir</button>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <nav>
+            <ul>
+                <li><a href="#" onclick="mostrarSeccion('usuarios')" class="active">Usuarios</a></li>
+                <li><a href="#" onclick="mostrarSeccion('equipos')">Equipos</a></li>
+                <li><a href="#" onclick="mostrarSeccion('jugadores')">Jugadores</a></li>
+                <li><a href="#" onclick="mostrarSeccion('partidos')">Partidos</a></li>
+                <li><a href="#" onclick="mostrarSeccion('resultados')">Resultados</a></li>
+                <li><a href="#" onclick="mostrarSeccion('clasificacion')">Clasificacion</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <section id="seccion-usuarios" class="seccion active">
+            <h2>Gestion de Usuarios</h2>
+            <div class="tabla-container">
+                <table id="tablaUsuarios">
+                    <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Equipo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="seccion-equipos" class="seccion">
+            <h2>Gestion de Equipos</h2>
+            <button onclick="mostrarModalEquipo()" class="btn-primary">+ Crear Equipo</button>
+            <div class="tabla-container">
+                <table id="tablaEquipos">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Universidad</th>
+                        <th>Ciudad</th>
+                        <th>V-D</th>
+                        <th>Puntos</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="seccion-jugadores" class="seccion">
+            <h2>Jugadores</h2>
+            <div class="tabla-container">
+                <table id="tablaJugadores">
+                    <thead>
+                    <tr>
+                        <th>Dorsal</th>
+                        <th>Nombre</th>
+                        <th>Equipo</th>
+                        <th>Posicion</th>
+                        <th>Altura</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="seccion-partidos" class="seccion">
+            <h2>Gestion de Partidos</h2>
+            <button onclick="mostrarModalPartido()" class="btn-primary">+ Crear Partido</button>
+            <div class="partidos-lista" id="partidosLista"></div>
+        </section>
+
+        <section id="seccion-resultados" class="seccion">
+            <h2>Resultados de Partidos</h2>
+            <div class="resultados-lista" id="resultadosLista"></div>
+        </section>
+
+        <section id="seccion-clasificacion" class="seccion">
+            <h2>Clasificacion de la Liga</h2>
+            <div class="tabla-container">
+                <table id="tablaClasificacion">
+                    <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>PJ</th>
+                        <th>V</th>
+                        <th>D</th>
+                        <th>Puntos</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- MODAL EQUIPO -->
+<div id="modalEquipo" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal('modalEquipo')">&times;</span>
+        <h2 id="modalEquipoTitulo">Crear Equipo</h2>
+        <form id="formEquipo">
+            <input type="hidden" id="equipoEditId">
+            <div class="form-group">
+                <label for="equipoNombreInput">Nombre del equipo:</label>
+                <input type="text" id="equipoNombreInput" required>
+            </div>
+            <div class="form-group">
+                <label for="equipoUniversidad">Universidad:</label>
+                <input type="text" id="equipoUniversidad" required>
+            </div>
+            <div class="form-group">
+                <label for="equipoCiudad">Ciudad:</label>
+                <input type="text" id="equipoCiudad" required>
+            </div>
+            <div class="form-group">
+                <label for="equipoColorPrimario">Color primario:</label>
+                <input type="color" id="equipoColorPrimario" value="#667eea">
+            </div>
+            <div class="form-group">
+                <label for="equipoColorSecundario">Color secundario:</label>
+                <input type="color" id="equipoColorSecundario" value="#764ba2">
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="cerrarModal('modalEquipo')" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL PARTIDO -->
+<div id="modalPartido" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal('modalPartido')">&times;</span>
+        <h2>Crear Partido</h2>
+        <form id="formPartido">
+            <div class="form-group">
+                <label for="partidoEquipoLocal">Equipo Local:</label>
+                <select id="partidoEquipoLocal" required></select>
+            </div>
+            <div class="form-group">
+                <label for="partidoEquipoVisitante">Equipo Visitante:</label>
+                <select id="partidoEquipoVisitante" required></select>
+            </div>
+            <div class="form-group">
+                <label for="partidoFecha">Fecha:</label>
+                <input type="date" id="partidoFecha" required>
+            </div>
+            <div class="form-group">
+                <label for="partidoHora">Hora:</label>
+                <input type="time" id="partidoHora" required>
+            </div>
+            <div class="form-group">
+                <label for="partidoJornada">Jornada:</label>
+                <input type="number" id="partidoJornada" min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="partidoPabellonNombre">Nombre del pabellon:</label>
+                <input type="text" id="partidoPabellonNombre">
+            </div>
+            <div class="form-group">
+                <label for="partidoPabellonCiudad">Ciudad del pabellon:</label>
+                <input type="text" id="partidoPabellonCiudad">
+            </div>
+            <div class="form-group">
+                <label for="partidoObservaciones">Observaciones:</label>
+                <textarea id="partidoObservaciones" rows="2"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="cerrarModal('modalPartido')" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-primary">Crear Partido</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL DATOS JUGADOR -->
+<div id="modalJugador" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal('modalJugador')">&times;</span>
+        <h2>Editar Datos de Jugador</h2>
+        <form id="formJugador">
+            <input type="hidden" id="jugadorEditId">
+            <div class="form-group">
+                <label for="jugadorDorsal">Dorsal:</label>
+                <input type="number" id="jugadorDorsal" min="0" max="99">
+            </div>
+            <div class="form-group">
+                <label for="jugadorPosicion">Posicion:</label>
+                <select id="jugadorPosicion">
+                    <option value="">Seleccionar...</option>
+                    <option value="BASE">Base</option>
+                    <option value="ESCOLTA">Escolta</option>
+                    <option value="ALERO">Alero</option>
+                    <option value="ALA_PIVOT">Ala-Pivot</option>
+                    <option value="PIVOT">Pivot</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="jugadorAltura">Altura (cm):</label>
+                <input type="number" step="0.1" id="jugadorAltura">
+            </div>
+            <div class="form-group">
+                <label for="jugadorPeso">Peso (kg):</label>
+                <input type="number" step="0.1" id="jugadorPeso">
+            </div>
+            <div class="form-group">
+                <label for="jugadorNacionalidad">Nacionalidad:</label>
+                <input type="text" id="jugadorNacionalidad">
+            </div>
+            <div class="form-group">
+                <label for="jugadorEquipo">Equipo:</label>
+                <select id="jugadorEquipo">
+                    <option value="">Sin equipo</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="cerrarModal('modalJugador')" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL RESULTADO -->
+<div id="modalResultado" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal('modalResultado')">&times;</span>
+        <h2>Registrar Resultado</h2>
+        <form id="formResultado">
+            <input type="hidden" id="resultadoPartidoId">
+            <div class="partido-info" id="resultadoPartidoInfo"></div>
+            <div class="form-group">
+                <label for="resultadoPuntosLocal">Puntos Equipo Local:</label>
+                <input type="number" id="resultadoPuntosLocal" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="resultadoPuntosVisitante">Puntos Equipo Visitante:</label>
+                <input type="number" id="resultadoPuntosVisitante" min="0" required>
+            </div>
+            <div class="form-group">
+                <label for="resultadoObservaciones">Observaciones:</label>
+                <textarea id="resultadoObservaciones" rows="2"></textarea>
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="cerrarModal('modalResultado')" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar Resultado</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- MODAL EDITAR USUARIO -->
+<div id="modalEditarUsuario" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal('modalEditarUsuario')">&times;</span>
+        <h2>Editar Usuario</h2>
+        <form id="formEditarUsuario">
+            <input type="hidden" id="usuarioEditId">
+            <div class="form-group">
+                <label for="usuarioNombre">Nombre:</label>
+                <input type="text" id="usuarioNombre" required>
+            </div>
+            <div class="form-group">
+                <label for="usuarioApellidos">Apellidos:</label>
+                <input type="text" id="usuarioApellidos">
+            </div>
+            <div class="form-group">
+                <label for="usuarioEmail">Email:</label>
+                <input type="email" id="usuarioEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="usuarioRol">Rol:</label>
+                <select id="usuarioRol" required>
+                    <option value="ADMIN">Administrador</option>
+                    <option value="JUGADOR">Jugador</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="usuarioEquipoSelect">Equipo Asignado:</label>
+                <select id="usuarioEquipoSelect">
+                    <option value="">Sin equipo</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" onclick="cerrarModal('modalEditarUsuario')" class="btn-secondary">Cancelar</button>
+                <button type="submit" class="btn-primary">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

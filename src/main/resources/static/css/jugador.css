@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f5f5;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 70px 1fr;
+    height: 100vh;
+}
+
+.header {
+    grid-area: header;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.btn-logout {
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05);
+    overflow-y: auto;
+}
+
+.perfil-jugador {
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.perfil-jugador h3 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.perfil-jugador p {
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.sidebar nav {
+    padding: 20px 0;
+}
+
+.sidebar nav ul {
+    list-style: none;
+}
+
+.sidebar nav ul li {
+    margin-bottom: 5px;
+}
+
+.sidebar nav ul li a {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+.sidebar nav ul li a:hover,
+.sidebar nav ul li a.active {
+    background: #667eea;
+    color: white;
+}
+
+.main-content {
+    grid-area: main;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.seccion {
+    display: none;
+}
+
+.seccion.active {
+    display: block;
+}
+
+.seccion h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.jugadores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.jugador-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s;
+}
+
+.jugador-card:hover {
+    transform: translateY(-5px);
+}
+
+.jugador-dorsal {
+    font-size: 36px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 10px;
+}
+
+.jugador-info p {
+    margin: 8px 0;
+    color: #666;
+}
+
+.jugador-info strong {
+    color: #333;
+}
+
+.partidos-lista {
+    display: grid;
+    gap: 20px;
+}
+
+.partido-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.partido-header {
+    margin-bottom: 15px;
+}
+
+.partido-jornada {
+    color: #667eea;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.partido-fecha {
+    color: #666;
+    font-size: 14px;
+}
+
+.partido-equipos {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.partido-detalles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.partido-detalles p {
+    font-size: 14px;
+    color: #666;
+}
+
+.clima-info {
+    background: #e3f2fd;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.resultados-lista {
+    display: grid;
+    gap: 15px;
+}
+
+.resultado-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.resultado-equipos {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.resultado-puntuacion {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    color: #667eea;
+    margin: 15px 0;
+}
