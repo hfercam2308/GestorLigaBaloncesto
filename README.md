@@ -1,46 +1,43 @@
 # 🏀 Gestor Liga Baloncesto
 
-¡Bienvenido al **Gestor de Liga de Baloncesto**! Esta aplicación es una solución robusta y moderna diseñada para gestionar equipos, partidos y usuarios de una liga de baloncesto, integrando datos en tiempo real y seguridad avanzada.
+¡Bienvenido al **Gestor de Liga de Baloncesto**! Una aplicación integral diseñada para la gestión de equipos, partidos y usuarios, con integración de datos meteorológicos y seguridad avanzada.
 
 ---
 
-## 🚀 Tecnologías Utilizadas
+## 🚀 Tecnologías Principales
 
-Este proyecto ha sido desarrollado utilizando un stack tecnológico moderno y eficiente:
+Este proyecto utiliza un stack tecnológico moderno para garantizar robustez y escalabilidad:
 
-*   **🍃 Base de Datos MongoDB:** Almacenamiento no relacional flexible y escalable para gestionar toda la información de la liga.
-*   **🏗️ Arquitectura API REST + Spring Boot:** Estructura sólida y modular para el backend, garantizando un rendimiento óptimo y facilidad de mantenimiento.
-*   **🛡️ Spring Security (Hashing BCrypt):** Implementación de seguridad de alto nivel para la protección de usuarios, utilizando BCrypt para el encriptado de contraseñas.
-*   **🌤️ API OpenWeatherMap:** Sistema inteligente que indica la temperatura y condiciones meteorológicas para los encuentros deportivos.
+*   **🍃 MongoDB:** Base de datos NoSQL para un almacenamiento flexible y dinámico.
+*   **🏗️ Spring Boot:** Framework principal para una arquitectura API REST eficiente.
+*   **🛡️ Spring Security:** Protección de datos mediante el encriptado de contraseñas con **BCrypt**.
+*   **🌤️ OpenWeatherMap API:** Integración de clima en tiempo real para la planificación de partidos.
 
 ---
 
-## 🛠️ Instalación y Configuración
+## 🛠️ Configuración del Proyecto
 
-1.  **Clonar el repositorio:**
+Para mantener el proyecto seguro, las claves sensibles se gestionan de forma externa:
+
+1.  **Clonación:**
     ```bash
     git clone https://github.com/hfercam2308/GestorLigaBaloncesto.git
     ```
-2.  **Configurar las variables de entorno:**
-    Crea un archivo `application.properties` o configura las variables de entorno necesarias (ver sección de Seguridad).
-3.  **Ejecutar la aplicación:**
-    ```bash
-    mvn spring-boot:run
-    ```
-
----
-
-## 🔒 Seguridad y Claves Privadas
-
-Para mantener tus claves a salvo y no exponerlas en repositorios públicos:
-
-1.  **Variables de Entorno:** No escribas las APIs directamente en el código. Usa `${WEATHER_API_KEY}` en tu `application.properties`.
-2.  **.gitignore:** Asegúrate de incluir archivos sensibles como `.env` o configuraciones locales en tu `.gitignore`.
-3.  **Configuración Recomendada:**
+2.  **Clave de API:**
+    Crea un archivo en `src/main/resources/application-local.properties` (este archivo está ignorado por Git) y añade tu clave:
     ```properties
-    weather.api.key=${WEATHER_API_KEY}
+    weather.api.key=TU_API_KEY_AQUI
     ```
 
 ---
 
-Desarrollado con ❤️ para la gestión deportiva.
+## 📸 Funcionalidades
+
+*   ✅ Gestión completa de Equipos y Jugadores.
+*   ✅ Programación de Partidos con predicción meteorológica.
+*   ✅ Sistema de autenticación seguro.
+*   ✅ API REST documentada y lista para su consumo.
+
+---
+
+Desarrollado con ❤️ por [hfercam2308](https://github.com/hfercam2308).
